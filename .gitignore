@@ -1,4 +1,4 @@
 .idea
 tomcat.8080
 target
-
+src/main/webapp/media

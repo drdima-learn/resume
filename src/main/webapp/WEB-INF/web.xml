@@ -5,4 +5,14 @@
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+
+    <fiter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </fiter-mapping>
+
 </web-app>

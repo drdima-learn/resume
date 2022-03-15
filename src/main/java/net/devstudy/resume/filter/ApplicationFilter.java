@@ -1,4 +1,4 @@
-package net.devsudy.resume.filter;
+package net.devstudy.resume.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

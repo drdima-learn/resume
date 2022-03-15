@@ -1,7 +1,7 @@
-package net.devsudy.resume.controller;
+package net.devstudy.resume.controller;
 
 
-import net.devsudy.resume.service.NameService;
+import net.devstudy.resume.service.NameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,0 +1,45 @@
+#01. run docker postgres
+docker run --name webtester01-postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres:alpine
+
+#02. bash to docker postgres
+docker exec -it webtester01-postgres bash
+
+#03. inside bash of docker container, run this command to enter psql shell, without password
+psql -U postgres
+
+
+#04. inside bash of docker container, run this command to enter psql shell, with password. It will prompt for a password
+psql -U postgres -W
+
+#05. list of databases
+\l
+
+#06. create db
+CREATE DATABASE webtester01;
+
+#07. connect to db
+\c webtester01
+
+
+#08. docker stop
+docker stop webtester01-postgres
+
+#09. docker start
+docker start webtester01-postgres
+
+# common sql
+INSERT INTO course (course_id , name, description, department) VALUES (uuid_generate_v4(), 'Database Fundamentals', 'TODO', 'Computer Science');
+
+INSERT INTO course (course_id , name, description, department) VALUES (uuid_generate_v4(), 'Spring Boot and React', 'TODO', 'Computer Science');
+
+INSERT INTO student_course (student_id , course_id, start_date, end_date) VALUES ('b5e3cc3b-49ea-47be-ae66-0c18ee110694', 'd4290b59-93bc-4f5c-9861-ce63f7ff5514', NOW()::DATE, (NOW() + INTERVAL '1 YEAR' )::DATE);
+
+
+select * from student join student_course ON student.student_id = student_course.student_id;
+
+select * from student join student_course using (student_id) join course using (course_id);
+
+
+
+
+

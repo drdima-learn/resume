@@ -1,4 +1,4 @@
-package net.devsudy.resume.service;
+package net.devstudy.resume.service;
 
 public class NameService {
     public static NameService getInstance(){
