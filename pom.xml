@@ -21,9 +21,9 @@
     <url>http://maven.apache.org</url>
 
 
-    <properties>
-        <tomcat.version>8.5.23</tomcat.version>
-    </properties>
+<!--    <properties>-->
+<!--        <tomcat.version>8.5.23</tomcat.version>-->
+<!--    </properties>-->
 
 
     <build>
@@ -31,25 +31,29 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                        <showWarnings>true</showWarnings>
-                        <showDeprecation>true</showDeprecation>
-                        <debug>true</debug>
-                    </configuration>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                    </configuration>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                    <configuration>-->
+<!--                        <source>1.7</source>-->
+<!--                        <target>1.7</target>-->
+<!--                        <showWarnings>true</showWarnings>-->
+<!--                        <showDeprecation>true</showDeprecation>-->
+<!--                        <debug>true</debug>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-war-plugin</artifactId>-->
+<!--                    <version>2.6</version>-->
+<!--                    <configuration>-->
+<!--                        <warSourceDirectory>src/main/webapp</warSourceDirectory>-->
+<!--                        <failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
 <!--                <plugin>-->
 <!--                    <artifactId>maven-ant-plugin</artifactId>-->
 <!--                    <version>1.8</version>-->
@@ -89,28 +93,28 @@
 
 
                 <!-- embeded tomcat -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>appassembler-maven-plugin</artifactId>
-                    <version>2.0.0</version>
-                    <configuration>
-                        <assembleDirectory>target</assembleDirectory>
-                        <programs>
-                            <program>
-                                <mainClass>launch.Main</mainClass>
-                                <name>webapp</name>
-                            </program>
-                        </programs>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>assemble</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.codehaus.mojo</groupId>-->
+<!--                    <artifactId>appassembler-maven-plugin</artifactId>-->
+<!--                    <version>2.0.0</version>-->
+<!--                    <configuration>-->
+<!--                        <assembleDirectory>target</assembleDirectory>-->
+<!--                        <programs>-->
+<!--                            <program>-->
+<!--                                <mainClass>launch.Main</mainClass>-->
+<!--                                <name>webapp</name>-->
+<!--                            </program>-->
+<!--                        </programs>-->
+<!--                    </configuration>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <phase>package</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>assemble</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
                 <!-- end of embeded tomcat -->
 
             </plugins>
@@ -205,6 +209,28 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>javax.servlet</groupId>-->
+<!--            <artifactId>jstl</artifactId>-->
+<!--        </dependency>-->
         <!-- end of spring -->
 
 

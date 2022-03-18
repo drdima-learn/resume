@@ -36,8 +36,8 @@ public class SearchController extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/JSP/search-form.jsp").forward(req, resp);
             return;
         }
-        String result = NameService.getInstance().convertName(name);
-        req.setAttribute("name", result);
-        req.getRequestDispatcher("/WEB-INF/JSP/search-result.jsp").forward(req, resp);
+        //String result = NameService.getInstance().convertName(name);
+        //req.setAttribute("name", result);
+        //req.getRequestDispatcher("/WEB-INF/JSP/search-result.jsp").forward(req, resp);
     }
 }
