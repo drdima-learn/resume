@@ -147,7 +147,41 @@
 <!--            <version>9.4.1208.jre7</version>-->
             <version>42.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
         <!-- end of db -->
+
+        <!-- jpa -->
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-entitymanager</artifactId>-->
+<!--            <version>5.1.0.Final</version>-->
+<!--        </dependency>-->
+
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- end of jpa -->
+
+
+
+        <!-- Dev Tools -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.16</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- end of Dev Tools -->
+
+
+
 
         <!-- image processing -->
         <dependency>

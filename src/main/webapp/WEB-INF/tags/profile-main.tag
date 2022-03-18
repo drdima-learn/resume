@@ -1,7 +1,7 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
 <div class="panel panel-primary">
-    <a href="/edit"><img class="img-responsive photo" src="/media/avatar/2eabdf3c-377a-4a27-835b-9fe14a123b58.jpg" alt="photo"></a>
+    <a href="/edit"><img class="img-responsive photo" src="/media/avatar/c072dffc-f40a-4857-b45d-9fa800925c63.jpg" alt="photo"></a>
     <h1 class="text-center">
         <a style="color: black;" href="/edit">${fullName}</a>
     </h1>
