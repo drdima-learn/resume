@@ -1,30 +1,26 @@
 package net.devstudy.resume.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 
 @MappedSuperclass
+@Getter
+@ToString
 public abstract class AbstractEntity{
     public static final int START_SEQ = 100000;
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    @Column(unique = true, nullable = false)
     protected Integer id;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + ":" + id;
-    }
 
     @Override
     public boolean equals(Object o) {

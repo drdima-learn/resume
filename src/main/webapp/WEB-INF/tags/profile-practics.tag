@@ -1,4 +1,7 @@
-<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -7,32 +10,42 @@
         </h3>
     </div>
     <div class="panel-body">
-        <ul class="timeline">
-            <li>
-                <div class="timeline-badge danger">
-                    <i class="fa fa-briefcase"></i>
-                </div>
-                <div class="timeline-panel">
-                    <div class="timeline-heading">
-                        <h4 class="timeline-title">Java Advanced Course at DevStudy.net</h4>
-                        <p>
-                            <small class="dates"><i class="fa fa-calendar"></i> Mar 2016 - <strong class="label label-danger">Current</strong> </small>
-                        </p>
+        <c:forEach items="${profile.practics}" var="practic" varStatus="loop">
+            <ul class="timeline">
+
+                <li>
+                    <div class="timeline-badge danger">
+                        <i class="fa fa-briefcase"></i>
                     </div>
-                    <div class="timeline-body">
-                        <p>
-                            <strong>Responsibilities included:</strong> Developing the web application 'online-resume' using bootstrap HTML template, downloaded from
-                            intenet. Populating database by test data and uploading web project to AWS EC2 instance
-                        </p>
-                        <p>
-                            <strong>Demo: </strong><a href="http://LINK_TO_DEMO_SITE">http://LINK_TO_DEMO_SITE</a>
-                        </p>
-                        <p>
-                            <strong>Source code: </strong><a href="https://github.com/TODO">https://github.com/TODO</a>
-                        </p>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">${practic.position}</h4>
+                            <p>
+                                <small class="dates"><i class="fa fa-calendar"></i> ${practic.beginDatePretty} -
+                                    <c:choose>
+                                        <c:when test="${practic.finishDate == null}">
+                                            <strong class="label label-danger">Current</strong>
+                                        </c:when>
+                                        <c:otherwise>${practic.finishDatePretty}</c:otherwise>
+                                    </c:choose>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>
+                                <strong>Responsibilities included:</strong> ${practic.responsibilities}
+                            </p>
+                            <p>
+                                <strong>Demo: </strong><a href="${practic.demo}">${practic.demo}</a>
+                            </p>
+                            <p>
+                                <strong>Source code: </strong><a
+                                    href="${practic.src}">${practic.src}</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </c:forEach>
     </div>
 </div>

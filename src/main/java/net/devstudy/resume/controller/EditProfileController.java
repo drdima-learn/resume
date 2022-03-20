@@ -1,7 +1,7 @@
 package net.devstudy.resume.controller;
 
 import net.devstudy.resume.entity.SkillCategory;
-import net.devstudy.resume.storage.SkillCategoryRepository;
+import net.devstudy.resume.repository.storage.SkillCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/edit")
-public class EditProfileController {
+public class EditProfileController extends AbstractController{
 
 
     @Autowired
@@ -27,7 +27,7 @@ public class EditProfileController {
     @GetMapping("/skills")
     public String getEditSkills(Model model) {
         List<SkillCategory> skillCategoryList = skillCategoryRepository.findAll(Sort.by("id"));
-        System.out.println(skillCategoryList);
+        LOGGER.debug("SkillCategories: {}",skillCategoryList);
         model.addAttribute("skillCategoryList", skillCategoryList);
         return "edit-skills";
     }

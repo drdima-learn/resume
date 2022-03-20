@@ -1,4 +1,4 @@
-package net.devstudy.resume.storage;
+package net.devstudy.resume.repository.storage;
 
 import net.devstudy.resume.entity.SkillCategory;
 import org.springframework.data.domain.Sort;

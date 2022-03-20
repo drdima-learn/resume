@@ -1,4 +1,7 @@
-<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -7,23 +10,33 @@
         </h3>
     </div>
     <div class="panel-body">
-        <ul class="timeline">
-            <li>
-                <div class="timeline-badge warning">
-                    <i class="fa fa-graduation-cap"></i>
-                </div>
-                <div class="timeline-panel">
-                    <div class="timeline-heading">
-                        <h4 class="timeline-title">The specialist degree in Electronic Engineering</h4>
-                        <p>
-                            <small class="dates"><i class="fa fa-calendar"></i> 2006 - 2011</small>
-                        </p>
+        <c:forEach items="${profile.educations}" var="education" varStatus="loop">
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-badge warning">
+                        <i class="fa fa-graduation-cap"></i>
                     </div>
-                    <div class="timeline-body">
-                        <p>Computer Science, Kharkiv National Technical University, Ukraine</p>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">${education.summary}</h4>
+                            <p>
+                                <small class="dates"><i class="fa fa-calendar"></i>
+                                        ${education.beginYear} -
+                                    <c:choose>
+                                        <c:when test="${education.finishYear == null}">
+                                            <strong class="label label-danger">Current</strong>
+                                        </c:when>
+                                        <c:otherwise>${education.finishYear}</c:otherwise>
+                                    </c:choose>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>${education.faculty}, ${education.university}</p>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </c:forEach>
     </div>
 </div>

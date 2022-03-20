@@ -1,24 +1,61 @@
-<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
 
 <div class="panel panel-primary">
-    <a href="/edit"><img class="img-responsive photo" src="/media/avatar/c072dffc-f40a-4857-b45d-9fa800925c63.jpg" alt="photo"></a>
+    <a href="/edit"><img class="img-responsive photo" src="${profile.largePhoto}" alt="photo"></a>
     <h1 class="text-center">
-        <a style="color: black;" href="/edit">${fullName}</a>
+        <a style="color: black;" href="/edit">${profile.fullName}</a>
     </h1>
     <h6 class="text-center">
-        <strong>Odessa, Ukraine</strong>
+        <strong>${profile.country}, ${profile.city}</strong>
     </h6>
     <h6 class="text-center">
-        <strong>Age:</strong> 27, <strong>Birthday: </strong> Feb 26, 1989
+        <strong>Age:</strong> ${profile.age}, <strong>Birthday: </strong> ${profile.birthDateFormatted}
     </h6>
     <div class="list-group contacts">
-        <a class="list-group-item" href="tel:+380507525137"><i class="fa fa-phone"></i> +380507525137</a>
-        <a class="list-group-item" href="mailto:richard-hendricks@gmail.com"><i class="fa fa-envelope"></i> richard-hendricks@gmail.com</a>
-        <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-skype"></i>richard-hendricks</a>
-        <a target="_blank" class="list-group-item" href="https://vk.com/richard-hendricks"><i class="fa fa-vk"></i> https://vk.com/richard-hendricks</a>
-        <a target="_blank" class="list-group-item" href="https://facebook.com/richard-hendricks"><i class="fa fa-facebook"></i> https://facebook.com/richard-hendricks</a>
-        <a target="_blank" class="list-group-item" href="https://linkedin.com/richard-hendricks"><i class="fa fa-linkedin"></i> https://linkedin.com/richard-hendricks</a>
-        <a target="_blank" class="list-group-item" href="https://github.com/richard-hendricks"><i class="fa fa-github"></i> https://github.com/richard-hendricks</a>
-        <a target="_blank" class="list-group-item" href="https://stackoverflow.com/richard-hendricks"><i class="fa fa-stack-overflow"></i> https://stackoverflow.com/richard-hendricks</a>
+        <a class="list-group-item" href="tel:${profile.phone}"><i class="fa fa-phone"></i> ${profile.phone}</a>
+        <a class="list-group-item" href="mailto:${profile.email}"><i class="fa fa-envelope"></i> ${profile.email}</a>
+        <c:if test="${profile.contacts.skype != null }">
+            <a class="list-group-item" href="javascript:void(0);">
+                <i class="fa fa-skype"></i>${profile.contacts.skype}
+            </a>
+        </c:if>
+
+        <c:if test="${profile.contacts.vkontakte != null }">
+            <a target="_blank" class="list-group-item" href="${profile.contacts.vkontakte}">
+                <i class="fa fa-vk"></i>
+                    ${profile.contacts.vkontaktes}
+            </a>
+        </c:if>
+
+        <c:if test="${profile.contacts.facebook != null }">
+            <a target="_blank" class="list-group-item" href="${profile.contacts.facebook}">
+                <i class="fa fa-facebook"></i>
+                    ${profile.contacts.facebook}
+            </a>
+        </c:if>
+
+        <c:if test="${profile.contacts.linkedin != null }">
+            <a target="_blank" class="list-group-item" href="${profile.contacts.linkedin}">
+                <i class="fa fa-linkedin"></i>
+                    ${profile.contacts.linkedin}
+            </a>
+        </c:if>
+
+        <c:if test="${profile.contacts.github != null }">
+            <a target="_blank" class="list-group-item" href="${profile.contacts.github}">
+                <i class="fa fa-github"></i>
+                    ${profile.contacts.github}
+            </a>
+        </c:if>
+
+        <c:if test="${profile.contacts.stackoverflow != null }">
+            <a target="_blank" class="list-group-item" href="${profile.contacts.stackoverflow}">
+                <i class="fa fa-stack-overflow"></i>
+                    ${profile.contacts.stackoverflow}
+            </a>
+        </c:if>
     </div>
 </div>

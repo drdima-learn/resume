@@ -1,5 +1,7 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
+
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -7,10 +9,9 @@
         </h3>
     </div>
     <div class="panel-body">
-        <h4>Junior java developer position</h4>
+        <h4>${profile.objective}</h4>
         <p>
-            <strong>Summary of Qualifications:</strong> <br> Three Java professional courses with developing one console application and two web
-            applications: blog and resume (Links to demo are provided)
+            <strong>Summary of Qualifications:</strong> <br> ${profile.summary}
         </p>
     </div>
 </div>

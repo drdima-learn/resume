@@ -1,4 +1,7 @@
-<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
 
 <div class="panel panel-primary certificates">
     <div class="panel-heading">
@@ -7,8 +10,12 @@
         </h3>
     </div>
     <div class="panel-body">
-        <a data-url="/media/certificates/5e1dbead-165e-461c-b088-7e6483bdcdc6.jpg" data-title="Jee certificate" href="#" class="thumbnail certificate-link">
-            <img alt="Jee certificate" src="/media/certificates/5e1dbead-165e-461c-b088-7e6483bdcdc6-sm.jpg" class="img-responsive"> <span>Jee certificate</span>
-        </a>
+        <c:forEach items="${profile.certificates}" var="certificate" varStatus="loop">
+            <a data-url="${certificate.largeUrl}" data-title="Jee certificate"
+               href="${certificate.largeUrl}" class="thumbnail certificate-link">
+                <img alt="Jee certificate" src="${certificate.smallUrl}"
+                     class="img-responsive"> <span>Jee certificate</span>
+            </a>
+        </c:forEach>
     </div>
 </div>
