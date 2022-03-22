@@ -3,8 +3,11 @@ package net.devstudy.resume.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import net.devstudy.resume.annotation.constraints.Adulthood;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
