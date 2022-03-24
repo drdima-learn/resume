@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 public interface ProfileRepository extends PagingAndSortingRepository<Profile, Integer> {
 
+    Profile findById(int id);
+
     Profile findByUid(String uid);
 
     Profile findByEmail(String email);

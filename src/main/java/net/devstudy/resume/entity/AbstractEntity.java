@@ -2,14 +2,14 @@ package net.devstudy.resume.entity;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-@Getter
-@ToString
+@Getter @Setter @ToString
 public abstract class AbstractEntity{
     public static final int START_SEQ = 100000;
 

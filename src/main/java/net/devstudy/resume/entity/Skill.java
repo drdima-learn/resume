@@ -1,12 +1,12 @@
 package net.devstudy.resume.entity;
 
-import lombok.Data;
+import lombok.*;
 import net.devstudy.resume.annotation.constraints.EnglishLanguage;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
-@Data
+@Getter @Setter @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 @Entity
 @Table(name = "skill")
 public class Skill extends AbstractEntity{
@@ -21,6 +21,7 @@ public class Skill extends AbstractEntity{
     @Size(min = 1)
     private String value;
 
+    @ToString.Exclude @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_profile", nullable = false)
     private Profile profile;

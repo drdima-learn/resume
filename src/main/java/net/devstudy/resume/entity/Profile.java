@@ -1,13 +1,11 @@
 package net.devstudy.resume.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import net.devstudy.resume.annotation.constraints.Adulthood;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -15,9 +13,8 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@ToString(callSuper = true)
-@Getter
-@Setter
+
+@Getter @Setter @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 @Entity
 @Table(name = "profile")
 public class Profile extends AbstractEntity {
@@ -131,7 +128,16 @@ public class Profile extends AbstractEntity {
         return formattedDate;
     }
 
+    public void setSkills(List<Skill> skills) {
+        updateListSetProfile(skills);
+        this.skills = skills;
 
+    }
 
-
+    private void updateListSetProfile(List<Skill> skills) {
+        if (skills == null) return;
+        for (Skill skill : skills) {
+            skill.setProfile(this);
+        }
+    }
 }

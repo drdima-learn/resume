@@ -4,7 +4,7 @@ import org.apache.commons.lang.WordUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NameService {
+public class NameService extends AbstractService{
 
 
     public String convertName(String name){

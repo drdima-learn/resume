@@ -5,6 +5,7 @@ import net.devstudy.resume.entity.SkillCategory;
 import net.devstudy.resume.form.SkillForm;
 import net.devstudy.resume.repository.storage.ProfileRepository;
 import net.devstudy.resume.repository.storage.SkillCategoryRepository;
+import net.devstudy.resume.service.EditProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,9 @@ import java.util.List;
 @RequestMapping("/edit")
 public class EditProfileController extends AbstractController{
 
-
     @Autowired
-    private SkillCategoryRepository skillCategoryRepository;
+    private EditProfileService editProfileService;
 
-    @Autowired
-    private ProfileRepository profileRepository;
 
     @GetMapping
     public String getEdit() {
@@ -36,7 +34,7 @@ public class EditProfileController extends AbstractController{
 
     @GetMapping("/skills")
     public String getEditSkills(Model model) {
-        List<Skill> skillList = profileRepository.findById(1).get().getSkills();
+        List<Skill> skillList = editProfileService.getSkills(1);
         SkillForm skillForm = new SkillForm(skillList);
         model.addAttribute("skillForm", skillForm);
         return gotoSkillsJSP(model);
@@ -48,11 +46,12 @@ public class EditProfileController extends AbstractController{
             return gotoSkillsJSP(model);
         }
         // TODO update skills
-        return "redirect:/aly-dutta";
+        editProfileService.updateSkills(1, form.getItems());
+        return redirect("/aly-dutta");
     }
 
     private String gotoSkillsJSP(Model model) {
-        List<SkillCategory> skillCategoryList = skillCategoryRepository.findAll(Sort.by("id"));
+        List<SkillCategory> skillCategoryList = editProfileService.getSkillCategoryList();
         LOGGER.debug("SkillCategories: {}",skillCategoryList);
         model.addAttribute("skillCategoryList", skillCategoryList);
         return "edit/skills";
