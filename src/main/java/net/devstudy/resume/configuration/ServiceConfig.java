@@ -1,4 +1,4 @@
-package net.devstudy.resume.service;
+package net.devstudy.resume.configuration;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;

@@ -1,7 +1,6 @@
 package net.devstudy.resume.controller;
 
 import net.devstudy.resume.entity.Profile;
-import net.devstudy.resume.repository.storage.ProfileRepository;
 import net.devstudy.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class PublicDataController extends AbstractController{
+public class PublicDataController extends AbstractController {
 
     @Autowired
     private FindProfileService findProfileService;

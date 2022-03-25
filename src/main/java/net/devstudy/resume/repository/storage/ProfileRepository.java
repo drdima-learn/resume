@@ -1,11 +1,8 @@
 package net.devstudy.resume.repository.storage;
 
 import net.devstudy.resume.entity.Profile;
-import net.devstudy.resume.entity.SkillCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

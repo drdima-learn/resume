@@ -114,6 +114,7 @@ public class Profile extends AbstractEntity {
 
     @Transient
     public int getAge() {
+        if (birthDay==null) return 0;
         LocalDate birthDate = birthDay.toLocalDate();
         LocalDate now = LocalDate.now();
         int age = Period.between(birthDate, now).getYears();
@@ -123,10 +124,21 @@ public class Profile extends AbstractEntity {
     @Transient
     public String getBirthDateFormatted() {
         //Feb 26, 1989
+        if (birthDay==null) return "";
         LocalDate date = birthDay.toLocalDate();
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
         return formattedDate;
     }
+
+    @Transient
+    public String getLargePhoto() {
+        if(largePhoto != null) {
+            return largePhoto;
+        } else {
+            return "/static/img/profile-placeholder.png";
+        }
+    }
+
 
     public void setSkills(List<Skill> skills) {
         updateListSetProfile(skills);

@@ -45,7 +45,7 @@ public class EditProfileService extends AbstractService {
         String baseUid = DataUtil.generateProfileUid(signUpForm);
         String uid = baseUid;
         for (int i = 0; profileRepository.countByUid(uid) > 0; i++) {
-            if (i == 3) {
+            if (i == maxTryCountGenerateUid) {
                 throw new CantCompleteClientRequestException(
                         "Can't generate unique uid for profile " + baseUid + ": maxTryCountGenerateUid detected"
                 );
