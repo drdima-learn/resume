@@ -1,4 +1,4 @@
-#01. run docker postgres
+#01. run docker postgres_
 docker run --name webtester01-postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres:alpine
 
 #02. bash to docker postgres
