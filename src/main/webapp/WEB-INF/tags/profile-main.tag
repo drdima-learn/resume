@@ -26,7 +26,7 @@
         <c:if test="${profile.contacts.vkontakte != null }">
             <a target="_blank" class="list-group-item" href="${profile.contacts.vkontakte}">
                 <i class="fa fa-vk"></i>
-                    ${profile.contacts.vkontaktes}
+                    ${profile.contacts.vkontakte}
             </a>
         </c:if>
 

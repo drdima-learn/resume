@@ -36,6 +36,7 @@ import org.joda.time.DateTime;
 import net.coobird.thumbnailator.Thumbnails;
 import net.devstudy.resume.model.LanguageLevel;
 import net.devstudy.resume.model.LanguageType;
+import org.postgresql.util.PSQLException;
 
 /**
  *
@@ -53,7 +54,7 @@ public class TestDataGenerator {
 
     private static final String PHOTO_PATH = "external/test-data/photos/";
     private static final String CERTIFICATES_PATH = "external/test-data/certificates/";
-    private static final String MEDIA_DIR = "D:/dev/drdima-learn/devstudy/resume/src/main/webapp/media";
+    private static final String MEDIA_DIR = "C:/dev/myprj/drdima-learn/resume/src/main/webapp/media";
     private static final String COUTRY = "Ukraine";
     private static final String[] CITIES = { "Kharkiv", "Kiyv", "Odessa" };
     private static final String[] FOREGIN_LANGUAGES = { "Spanish", "French", "German", "Italian" };
@@ -126,16 +127,31 @@ public class TestDataGenerator {
 
     private static void clearDb(Connection c) throws SQLException {
         Statement st = c.createStatement();
-        st.executeUpdate("delete from profile");
-        st.executeUpdate("delete from skill_category");
-        st.executeQuery("select setval('profile_seq', 1, false)");
-        st.executeQuery("select setval('hobby_seq', 1, false)");
-        st.executeQuery("select setval('certificate_seq', 1, false)");
-        st.executeQuery("select setval('education_seq', 1, false)");
-        st.executeQuery("select setval('language_seq', 1, false)");
-        st.executeQuery("select setval('practic_seq', 1, false)");
-        st.executeQuery("select setval('skill_seq', 1, false)");
-        st.executeQuery("select setval('course_seq', 1, false)");
+//        try {
+//            st.executeUpdate("delete from profile");
+//        }
+//        catch (PSQLException e){
+//            System.out.println("table profile does not exits");
+//        }
+//
+//        try{
+//            st.executeUpdate("delete from skill_category");
+//        }
+//        catch (PSQLException e){
+//            System.out.println("table skill_category does not exits");
+//        }
+//        st.executeQuery("select setval('profile_seq', 1, false)");
+//        st.executeQuery("select setval('hobby_seq', 1, false)");
+//        st.executeQuery("select setval('certificate_seq', 1, false)");
+//        st.executeQuery("select setval('education_seq', 1, false)");
+//        st.executeQuery("select setval('language_seq', 1, false)");
+//        st.executeQuery("select setval('practic_seq', 1, false)");
+//        st.executeQuery("select setval('skill_seq', 1, false)");
+//        st.executeQuery("select setval('course_seq', 1, false)");
+
+
+        st.executeQuery("select setval('global_seq', 100000, false)");
+
         System.out.println("Db cleared");
     }
 

@@ -12,7 +12,9 @@ public class CustomSiteMeshFilter extends ConfigurableSiteMeshFilter {
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         // Assigning default decorator if no path specific decorator found
-        builder.addDecoratorPath("/*", "/WEB-INF/template/page-template.jsp")
+        builder
+                .addDecoratorPath("/*", "/WEB-INF/template/page-template.jsp")
+                .addDecoratorPath("/fragment/*", "/WEB-INF/template/fragment-template.jsp")
                 // Map decorators to specific path patterns.
                 //.addDecoratorPath("/login", "/WEB-INF/sitemesh/simpleDecorator .jsp")
                 // Exclude few paths from decoration.
