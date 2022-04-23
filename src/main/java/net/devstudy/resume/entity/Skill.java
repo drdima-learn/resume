@@ -1,5 +1,6 @@
 package net.devstudy.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import net.devstudy.resume.annotation.constraints.EnglishLanguage;
 
@@ -24,5 +25,6 @@ public class Skill extends AbstractEntity{
     @ToString.Exclude @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_profile", nullable = false)
+    @JsonIgnore
     private Profile profile;
 }

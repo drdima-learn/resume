@@ -1,6 +1,5 @@
 package net.devstudy.resume.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,8 +8,10 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 
 @MappedSuperclass
-@Getter @Setter @ToString
-public abstract class AbstractEntity{
+@Getter
+@Setter
+@ToString
+public abstract class AbstractEntity {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -18,8 +19,6 @@ public abstract class AbstractEntity{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     @Column(unique = true, nullable = false)
     protected Integer id;
-
-
 
 
     @Override

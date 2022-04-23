@@ -1,5 +1,6 @@
 package net.devstudy.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,5 +15,6 @@ public class Hobby extends AbstractEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_profile", nullable = false)
+    @JsonIgnore
     private Profile profile;
 }

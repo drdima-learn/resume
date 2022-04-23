@@ -6,7 +6,9 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
+<!--        <version>2.3.0.RELEASE</version>-->
+        <version>2.4.0</version>
+<!--        <version>2.0.2.RELEASE</version>-->
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -147,11 +149,6 @@
 <!--            <version>9.4.1208.jre7</version>-->
             <version>42.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-            <version>2.1.1</version>
-        </dependency>
         <!-- end of db -->
 
         <!-- jpa -->
@@ -276,6 +273,26 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
+<!--         elastic search-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.data</groupId>-->
+<!--            <artifactId>spring-data-elasticsearch</artifactId>-->
+<!--            <version>4.0.0.RELEASE</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.2.2</version>
+        </dependency>
+
+<!--         end of elastic search-->
+
 
         <!-- for upload -->
         <dependency>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FindProfileService extends AbstractService{
@@ -21,5 +22,18 @@ public class FindProfileService extends AbstractService{
     public Page<Profile> findAll(Pageable pageable) {
         Page<Profile> profiles = profileRepository.findAll(pageable);
         return profiles;
+    }
+
+    @Transactional
+    public Iterable<Profile> findAllForIndexing(){
+        Iterable<Profile> all = profileRepository.findAll();
+        for(Profile p : all){
+            p.getSkills().size();
+            p.getCertificates().size();
+            p.getLanguages().size();
+            p.getPractics().size();
+            p.getCourses().size();
+        }
+        return all;
     }
 }
