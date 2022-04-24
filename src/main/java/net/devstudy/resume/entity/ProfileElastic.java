@@ -1,13 +1,10 @@
 package net.devstudy.resume.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -22,10 +19,8 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@Entity
-@Table(name = "profile")
 @Document(indexName = "profile")
-public class Profile extends AbstractEntity {
+public class ProfileElastic extends AbstractEntity {
 
 
     @Column(name = "birth_day")
@@ -48,16 +43,18 @@ public class Profile extends AbstractEntity {
     private String objective;
 
     @Column(name = "large_photo", length = 255)
-
+    @Transient
     private String largePhoto;
 
     @Column(name = "small_photo", length = 255)
     private String smallPhoto;
 
     @Column(name = "phone", length = 20)
+    @Transient
     private String phone;
 
     @Column(name = "email", length = 100)
+    @Transient
     private String email;
 
     @Column(name = "info")
@@ -70,45 +67,55 @@ public class Profile extends AbstractEntity {
     private String uid;
 
     @Column(name = "password", nullable = false, length = 50)
+    @Transient
     private String password;
 
     @Column(name = "completed", nullable = false)
+    @Transient
     private Boolean completed;
 
     @Column(name = "created", insertable = false)
+    @Transient
     private Timestamp created;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @Transient
     private List<Certificate> certificates;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("finishYear DESC, beginYear DESC , id DESC")
+    @Transient
     private List<Education> educations;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("name DESC")
+    @Transient
     private List<Hobby> hobbies;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @Transient
     private List<Language> languages;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("finishDate DESC")
+    @Transient
     private List<Practic> practics;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("id ASC")
+    @Transient
     private List<Skill> skills;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @OrderBy("finishDate DESC")
+    @Transient
     private List<Course> courses;
 
     //@ToString.Exclude
@@ -116,49 +123,5 @@ public class Profile extends AbstractEntity {
     private Contacts contacts;
 
 
-    @Transient
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
 
-    @Transient
-    public int getAge() {
-        if (birthDay == null) return 0;
-        LocalDate birthDate = birthDay.toLocalDate();
-        LocalDate now = LocalDate.now();
-        int age = Period.between(birthDate, now).getYears();
-        return age;
-    }
-
-    @Transient
-    public String getBirthDateFormatted() {
-        //Feb 26, 1989
-        if (birthDay == null) return "";
-        LocalDate date = birthDay.toLocalDate();
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
-        return formattedDate;
-    }
-
-    @Transient
-    public String getLargePhoto() {
-        if (largePhoto != null) {
-            return largePhoto;
-        } else {
-            return "/static/img/profile-placeholder.png";
-        }
-    }
-
-
-    public void setSkills(List<Skill> skills) {
-        updateListSetProfile(skills);
-        this.skills = skills;
-
-    }
-
-    private void updateListSetProfile(List<Skill> skills) {
-        if (skills == null) return;
-        for (Skill skill : skills) {
-            skill.setProfile(this);
-        }
-    }
 }
