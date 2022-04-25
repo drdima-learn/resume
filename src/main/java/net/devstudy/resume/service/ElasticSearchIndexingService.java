@@ -1,13 +1,13 @@
 package net.devstudy.resume.service;
 
-import net.devstudy.resume.entity.Profile;
+import net.devstudy.resume.entity.jpa.Profile;
 
-import net.devstudy.resume.entity.ProfileElastic;
-import net.devstudy.resume.entity.Test01;
+import net.devstudy.resume.entity.elastic.ProfileElastic;
 import net.devstudy.resume.repository.search.ProfileSearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.IndexOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -35,19 +35,11 @@ public class ElasticSearchIndexingService extends AbstractService {
             elasticsearchOperations.deleteIndex(ProfileElastic.class);
             LOGGER.info("Start index of profiles");
 
-            //Test01 test01 = new Test01("1",2,3);
-            //profileSearchRepository.save(test01);
 
             for(Profile p : findProfileService.findAllForIndexing()){
-
-                ProfileElastic profileElastic = new ProfileElastic();
-                profileElastic.setId(123);
-                profileElastic.setFirstName("Vasya");
-
-                profileSearchRepository.save(profileElastic);
+                profileSearchRepository.save(p.getProfileElastic());
 
                 LOGGER.info("Successful indexing of profile" + p.getUid());
-                break;
             }
             LOGGER.info("Finish index of profiles");
         }

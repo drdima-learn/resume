@@ -1,7 +1,11 @@
-package net.devstudy.resume.entity;
+package net.devstudy.resume.entity.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import net.devstudy.resume.entity.AbstractEntity;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 @Data
 @Entity
 @Table(name = "practic")
-public class Practic extends AbstractEntity{
+public class Practic extends AbstractEntity {
 
     @Column(name = "position", length = 100)
     private String position;
@@ -20,10 +24,12 @@ public class Practic extends AbstractEntity{
     private String company;
 
     @Column(name = "begin_date")
-    private Date beginDate;
+    @Field(type = FieldType.Date, format = DateFormat.date)
+    private LocalDate beginDate;
 
     @Column(name = "finish_date")
-    private Date finishDate;
+    @Field(type = FieldType.Date, format = DateFormat.date)
+    private LocalDate finishDate;
 
     @Column(name = "responsibilities", length = 2147483647)
     private String responsibilities;
@@ -36,7 +42,6 @@ public class Practic extends AbstractEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_profile", nullable = false)
-    @JsonIgnore
     private Profile profile;
 
     @Transient
@@ -50,10 +55,24 @@ public class Practic extends AbstractEntity{
     }
 
     @Transient
-    private String getDatePretty(Date date){
+    private String getDatePretty(LocalDate date){
         //Mar 2016
-        LocalDate localDate = date.toLocalDate();
+        LocalDate localDate = date;
         String formattedDate = localDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
         return formattedDate;
+    }
+
+    @Transient
+    public Practic getPracticWoProfile() {
+        Practic practic = new Practic();
+        practic.setId(getId());
+        practic.setCompany(getCompany());
+        practic.setBeginDate(getBeginDate());
+        practic.setFinishDate(getFinishDate());
+        practic.setResponsibilities(getResponsibilities());
+        practic.setDemo(getDemo());
+        practic.setSrc(getSrc());
+        practic.setProfile(null);
+        return practic;
     }
 }

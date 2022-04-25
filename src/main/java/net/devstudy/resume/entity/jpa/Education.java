@@ -1,7 +1,8 @@
-package net.devstudy.resume.entity;
+package net.devstudy.resume.entity.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import net.devstudy.resume.entity.AbstractEntity;
 
 import javax.persistence.*;
 

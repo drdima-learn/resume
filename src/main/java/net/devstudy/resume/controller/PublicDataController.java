@@ -1,7 +1,7 @@
 package net.devstudy.resume.controller;
 
 import net.devstudy.resume.Constants;
-import net.devstudy.resume.entity.Profile;
+import net.devstudy.resume.entity.jpa.Profile;
 import net.devstudy.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 
 @Controller
 public class PublicDataController extends AbstractController {

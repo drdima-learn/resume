@@ -3,7 +3,7 @@ package net.devstudy.resume.form;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import net.devstudy.resume.entity.Skill;
+import net.devstudy.resume.entity.jpa.Skill;
 
 import javax.validation.Valid;
 import java.util.ArrayList;

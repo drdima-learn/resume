@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 
-<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.jpa.Profile"/>
 
 <div class="panel panel-primary certificates">
     <div class="panel-heading">

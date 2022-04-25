@@ -1,6 +1,6 @@
 package net.devstudy.resume.controller;
 
-import net.devstudy.resume.entity.Profile;
+import net.devstudy.resume.entity.jpa.Profile;
 import net.devstudy.resume.form.SignUpForm;
 import net.devstudy.resume.service.EditProfileService;
 import org.springframework.beans.factory.annotation.Autowired;

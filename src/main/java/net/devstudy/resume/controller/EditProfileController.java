@@ -1,14 +1,11 @@
 package net.devstudy.resume.controller;
 
-import net.devstudy.resume.entity.Skill;
-import net.devstudy.resume.entity.SkillCategory;
+import net.devstudy.resume.entity.jpa.Skill;
+import net.devstudy.resume.entity.jpa.SkillCategory;
 import net.devstudy.resume.form.SkillForm;
-import net.devstudy.resume.repository.storage.ProfileRepository;
-import net.devstudy.resume.repository.storage.SkillCategoryRepository;
 import net.devstudy.resume.service.EditProfileService;
 import net.devstudy.resume.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

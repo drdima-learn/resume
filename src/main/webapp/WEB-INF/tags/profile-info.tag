@@ -1,6 +1,6 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
-<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.Profile"/>
+<jsp:useBean id="profile" scope="request" type="net.devstudy.resume.entity.jpa.Profile"/>
 
 <div class="panel panel-primary">
     <div class="panel-heading">

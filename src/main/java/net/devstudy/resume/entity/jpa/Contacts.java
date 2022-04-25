@@ -1,4 +1,4 @@
-package net.devstudy.resume.entity;
+package net.devstudy.resume.entity.jpa;
 
 import lombok.Data;
 

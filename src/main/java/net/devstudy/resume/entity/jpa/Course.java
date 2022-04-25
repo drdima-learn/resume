@@ -1,7 +1,8 @@
-package net.devstudy.resume.entity;
+package net.devstudy.resume.entity.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import net.devstudy.resume.entity.AbstractEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.sql.Date;
 @Data
 @Entity
 @Table(name = "course")
-public class Course extends AbstractEntity{
+public class Course extends AbstractEntity {
 
     @Column(name = "name", length = 60)
     private String name;
@@ -39,4 +40,6 @@ public class Course extends AbstractEntity{
         String formattedDate = localDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
         return formattedDate;
     }
+
+
 }

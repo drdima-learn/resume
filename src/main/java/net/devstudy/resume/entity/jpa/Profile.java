@@ -1,13 +1,15 @@
-package net.devstudy.resume.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package net.devstudy.resume.entity.jpa;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import net.devstudy.resume.entity.AbstractEntity;
+import net.devstudy.resume.entity.elastic.ProfileElastic;
+
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
+
+
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -15,6 +17,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -29,7 +33,7 @@ public class Profile extends AbstractEntity {
 
 
     @Column(name = "birth_day")
-    private Date birthDay;
+    private LocalDate birthDay;
 
     @Column(name = "city")
     private String city;
@@ -48,7 +52,6 @@ public class Profile extends AbstractEntity {
     private String objective;
 
     @Column(name = "large_photo", length = 255)
-
     private String largePhoto;
 
     @Column(name = "small_photo", length = 255)
@@ -124,7 +127,7 @@ public class Profile extends AbstractEntity {
     @Transient
     public int getAge() {
         if (birthDay == null) return 0;
-        LocalDate birthDate = birthDay.toLocalDate();
+        LocalDate birthDate = birthDay;
         LocalDate now = LocalDate.now();
         int age = Period.between(birthDate, now).getYears();
         return age;
@@ -134,7 +137,7 @@ public class Profile extends AbstractEntity {
     public String getBirthDateFormatted() {
         //Feb 26, 1989
         if (birthDay == null) return "";
-        LocalDate date = birthDay.toLocalDate();
+        LocalDate date = birthDay;
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
         return formattedDate;
     }
@@ -160,5 +163,84 @@ public class Profile extends AbstractEntity {
         for (Skill skill : skills) {
             skill.setProfile(this);
         }
+    }
+
+    @Transient
+    public ProfileElastic getProfileElastic() {
+        ProfileElastic profileElastic = new ProfileElastic();
+        profileElastic.setId(getId());
+        profileElastic.setBirthDay(getBirthDay());
+        profileElastic.setCity(getCity());
+        profileElastic.setCountry(getCountry());
+        profileElastic.setFirstName(getFirstName());
+        profileElastic.setLastName(getLastName());
+        profileElastic.setObjective(getObjective());
+        profileElastic.setSmallPhoto(getSmallPhoto());
+        profileElastic.setInfo(getInfo());
+        profileElastic.setSummary(getSummary());
+        profileElastic.setUid(getUid());
+        profileElastic.setContacts(getContacts());
+
+        profileElastic.setCertificates(getCertificatesWoProfile());
+        profileElastic.setLanguages(getLanguagesWoProfile());
+        profileElastic.setPractics(getPracticsWoProfile());
+        profileElastic.setSkills(getSkillsWoProfile());
+
+
+        return profileElastic;
+    }
+
+
+
+    @Transient
+    private List<Certificate> getCertificatesWoProfile(){
+        List<Certificate> certificatesElastic = new ArrayList<>();
+        for (Certificate c : getCertificates()) {
+            certificatesElastic.add(c.getCertificateWoProfile());
+        }
+        return certificatesElastic;
+    }
+
+    @Transient
+    private List<Language> getLanguagesWoProfile(){
+        List<Language> languagesElastic = new ArrayList<>();
+        for (Language l : getLanguages()) {
+            languagesElastic.add(l.getLanguageWoProfile());
+        }
+        return languagesElastic;
+    }
+
+    @Transient
+    private List<Practic> getPracticsWoProfile(){
+        List<Practic> practicsElastic = new ArrayList<>();
+        for (Practic p : getPractics()) {
+            practicsElastic.add(p.getPracticWoProfile());
+        }
+        return practicsElastic;
+    }
+
+    @Transient
+    private List<Skill> getSkillsWoProfile(){
+        List<Skill> skillsElastic = new ArrayList<>();
+        for (Skill s : getSkills()) {
+            skillsElastic.add(s.getSkillWoProfile());
+        }
+        return skillsElastic;
+    }
+
+    public List<Certificate> getCertificates() {
+        return certificates==null ? Collections.EMPTY_LIST : certificates;
+    }
+
+    public List<Language> getLanguages() {
+        return languages==null ? Collections.EMPTY_LIST : languages;
+    }
+
+    public List<Practic> getPractics() {
+        return practics==null ? Collections.EMPTY_LIST : practics;
+    }
+
+    public List<Skill> getSkills() {
+        return skills==null ? Collections.EMPTY_LIST : skills;
     }
 }

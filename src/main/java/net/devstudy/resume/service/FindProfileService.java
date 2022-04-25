@@ -1,6 +1,6 @@
 package net.devstudy.resume.service;
 
-import net.devstudy.resume.entity.Profile;
+import net.devstudy.resume.entity.jpa.Profile;
 import net.devstudy.resume.repository.storage.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

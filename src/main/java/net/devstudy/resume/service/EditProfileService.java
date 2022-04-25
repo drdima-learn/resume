@@ -1,10 +1,12 @@
 package net.devstudy.resume.service;
 
-import net.devstudy.resume.entity.Profile;
-import net.devstudy.resume.entity.Skill;
-import net.devstudy.resume.entity.SkillCategory;
+import net.devstudy.resume.entity.elastic.ProfileElastic;
+import net.devstudy.resume.entity.jpa.Profile;
+import net.devstudy.resume.entity.jpa.Skill;
+import net.devstudy.resume.entity.jpa.SkillCategory;
 import net.devstudy.resume.exception.CantCompleteClientRequestException;
 import net.devstudy.resume.form.SignUpForm;
+import net.devstudy.resume.repository.search.ProfileSearchRepository;
 import net.devstudy.resume.repository.storage.ProfileRepository;
 import net.devstudy.resume.repository.storage.SkillCategoryRepository;
 import net.devstudy.resume.util.DataUtil;
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
@@ -29,6 +33,9 @@ public class EditProfileService extends AbstractService {
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
 
+    @Autowired
+    private ProfileSearchRepository profileSearchRepository;
+
     @Transactional
     public Profile createNewProfile(SignUpForm signUpForm) {
         Profile profile = new Profile();
@@ -38,7 +45,21 @@ public class EditProfileService extends AbstractService {
         profile.setPassword(signUpForm.getPassword());
         profile.setCompleted(false);
         profile = profileRepository.save(profile);
+        registerCreateIndexProfileIfTransactionSuccess(profile);
         return profile;
+    }
+
+    private void registerCreateIndexProfileIfTransactionSuccess(final Profile profile) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+
+                LOGGER.info("New profile created: {}", profile.getUid());
+                ProfileElastic pe = profile.getProfileElastic();
+                profileSearchRepository.save(pe);
+                LOGGER.info("New profilw index created: {}", pe.getInfo());
+            }
+        });
     }
 
     private String generateProfileUid(SignUpForm signUpForm) {
@@ -76,7 +97,16 @@ public class EditProfileService extends AbstractService {
         } else {
             profile.setSkills(updateData);
             profileRepository.save(profile);
+            registerUpdateIndexProfileSkillsIfTransactionSuccess(idProfile, updateData);
         }
+
+    }
+
+    private void registerUpdateIndexProfileSkillsIfTransactionSuccess(int idProfile, List<Skill> updateData) {
+        ProfileElastic profileElastic = profileSearchRepository.findById(idProfile).get();
+        profileElastic.setSkills(Skill.getSkillsWoProfile(updateData));
+        profileSearchRepository.save(profileElastic);
+        LOGGER.info("Profile skills index updated");
 
     }
 }
