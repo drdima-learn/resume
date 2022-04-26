@@ -9,13 +9,13 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 public interface ProfileSearchRepository extends ElasticsearchRepository<ProfileElastic, Integer> {
 
-//    Page<ProfileElastic> findByObjectiveLikeOrSummaryLikeOrPracticsCompanyLikeOrPracticsPositionLike(
-//            String objective,
-//            String summary,
-//            String practicCompany,
-//            String practicPosition,
-//            Pageable pageable
-//    );
+    Page<ProfileElastic> findByObjectiveLikeOrSummaryLikeOrPracticsCompanyLikeOrPracticsPositionLike(
+            String objective,
+            String summary,
+            String practicCompany,
+            String practicPosition,
+            Pageable pageable
+    );
 
 
 }

@@ -1,6 +1,8 @@
 package net.devstudy.resume.service;
 
+import net.devstudy.resume.entity.elastic.ProfileElastic;
 import net.devstudy.resume.entity.jpa.Profile;
+import net.devstudy.resume.repository.search.ProfileSearchRepository;
 import net.devstudy.resume.repository.storage.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,9 @@ public class FindProfileService extends AbstractService{
 
     @Autowired
     ProfileRepository profileRepository;
+
+    @Autowired
+    ProfileSearchRepository profileSearchRepository;
 
     public Profile findByUid(String uid){
         Profile profile = profileRepository.findByUid(uid);
@@ -35,5 +40,11 @@ public class FindProfileService extends AbstractService{
             p.getCourses().size();
         }
         return all;
+    }
+
+    public Page<ProfileElastic> findbySearchQuery(String query, Pageable pageable){
+        return profileSearchRepository.findByObjectiveLikeOrSummaryLikeOrPracticsCompanyLikeOrPracticsPositionLike(
+                query,query,query,query,pageable
+        );
     }
 }
