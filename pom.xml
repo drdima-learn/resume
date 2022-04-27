@@ -6,10 +6,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-<!--        <version>2.3.0.RELEASE</version>-->
         <version>2.4.0</version>
-<!--        <version>2.0.2.RELEASE</version>-->
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
 
@@ -22,12 +20,6 @@
     <name>resume Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
-
-<!--    <properties>-->
-<!--        <tomcat.version>8.5.23</tomcat.version>-->
-<!--    </properties>-->
-
-
     <build>
         <finalName>resume</finalName>
         <pluginManagement>
@@ -36,128 +28,23 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                    <configuration>-->
-<!--                        <source>1.7</source>-->
-<!--                        <target>1.7</target>-->
-<!--                        <showWarnings>true</showWarnings>-->
-<!--                        <showDeprecation>true</showDeprecation>-->
-<!--                        <debug>true</debug>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-war-plugin</artifactId>-->
-<!--                    <version>2.6</version>-->
-<!--                    <configuration>-->
-<!--                        <warSourceDirectory>src/main/webapp</warSourceDirectory>-->
-<!--                        <failOnMissingWebXml>false</failOnMissingWebXml>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <artifactId>maven-ant-plugin</artifactId>-->
-<!--                    <version>1.8</version>-->
-<!--                    <executions>-->
-<!--                        &lt;!&ndash; clean &ndash;&gt;-->
-<!--                        <execution>-->
-<!--                            <id>clean-lib</id>-->
-<!--                            <phase>clean</phase>-->
-<!--                            <configuration>-->
-<!--                                <tasks>-->
-<!--                                    <delete dir="${basedir}/src/main/webapp/WEB-INF/lib"/>-->
-<!--                                </tasks>-->
-<!--                            </configuration>-->
-<!--                            <goals>-->
-<!--                                <goal>run</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                        &lt;!&ndash; build &ndash;&gt;-->
-<!--                        <execution>-->
-<!--                            <id>copy-lib</id>-->
-<!--                            <phase>package</phase>-->
-<!--                            <configuration>-->
-<!--                                <tasks>-->
-<!--                                    <delete dir="${basedir}/src/main/webapp/WEB-INF/lib"/>-->
-<!--                                    <copy todir="${basedir}/src/main/webapp/WEB-INF/lib">-->
-<!--                                        <fileset-->
-<!--                                                dir="${basedir}/target/${project.build.finalName}/WEB-INF/lib"/>-->
-<!--                                    </copy>-->
-<!--                                </tasks>-->
-<!--                            </configuration>-->
-<!--                            <goals>-->
-<!--                                <goal>run</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-
-
-                <!-- embeded tomcat -->
-<!--                <plugin>-->
-<!--                    <groupId>org.codehaus.mojo</groupId>-->
-<!--                    <artifactId>appassembler-maven-plugin</artifactId>-->
-<!--                    <version>2.0.0</version>-->
-<!--                    <configuration>-->
-<!--                        <assembleDirectory>target</assembleDirectory>-->
-<!--                        <programs>-->
-<!--                            <program>-->
-<!--                                <mainClass>launch.Main</mainClass>-->
-<!--                                <name>webapp</name>-->
-<!--                            </program>-->
-<!--                        </programs>-->
-<!--                    </configuration>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <phase>package</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>assemble</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-                <!-- end of embeded tomcat -->
-
             </plugins>
         </pluginManagement>
     </build>
 
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>javax.servlet-api</artifactId>-->
-<!--            <version>3.1.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>ch.qos.logback</groupId>-->
-<!--            <artifactId>logback-classic</artifactId>-->
-<!--            <version>1.1.7</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>jstl</artifactId>-->
-<!--            <version>1.2</version>-->
-<!--        </dependency>-->
+
 
         <!-- db -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-<!--            <version>9.4.1208.jre7</version>-->
             <version>42.2.1</version>
         </dependency>
         <!-- end of db -->
 
         <!-- jpa -->
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-entitymanager</artifactId>-->
-<!--            <version>5.1.0.Final</version>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -165,13 +52,11 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <!-- end of jpa -->
-
 
 
         <!-- Dev Tools -->
@@ -182,8 +67,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- end of Dev Tools -->
-
-
 
 
         <!-- image processing -->
@@ -221,13 +104,13 @@
         </dependency>
         <!-- end of datetime utils -->
 
-        <!-- shablon -->
+        <!-- templates -->
         <dependency>
             <groupId>org.sitemesh</groupId>
             <artifactId>sitemesh</artifactId>
             <version>3.0.1</version>
         </dependency>
-        <!-- end of shablon -->
+        <!-- end of templates -->
 
 
         <!-- frontend -->
@@ -248,7 +131,6 @@
             <version>4.6.1</version>
         </dependency>
         <!-- end of frontend -->
-
 
 
         <!-- spring -->
@@ -274,72 +156,28 @@
             <version>1.2</version>
         </dependency>
 
-<!--         elastic search-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.data</groupId>-->
-<!--            <artifactId>spring-data-elasticsearch</artifactId>-->
-<!--            <version>4.0.0.RELEASE</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
+        <!-- end of spring -->
+
+        <!-- elastic search -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.java.dev.jna</groupId>
-            <artifactId>jna</artifactId>
-            <version>4.2.2</version>
-        </dependency>
+        <!--         end of elastic search-->
 
 
-
-
-<!--         end of elastic search-->
-
-
-        <!-- for upload -->
+        <!-- upload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.1</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>jstl</artifactId>-->
-<!--        </dependency>-->
-        <!-- end of spring -->
-
-
-
-        <!-- tomcat embeded -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.tomcat.embed</groupId>-->
-<!--            <artifactId>tomcat-embed-core</artifactId>-->
-<!--            <version>${tomcat.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.tomcat.embed</groupId>-->
-<!--            <artifactId>tomcat-embed-jasper</artifactId>-->
-<!--            <version>${tomcat.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.tomcat</groupId>-->
-<!--            <artifactId>tomcat-jasper</artifactId>-->
-<!--            <version>${tomcat.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.tomcat</groupId>-->
-<!--            <artifactId>tomcat-jasper-el</artifactId>-->
-<!--            <version>${tomcat.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.tomcat</groupId>-->
-<!--            <artifactId>tomcat-jsp-api</artifactId>-->
-<!--            <version>${tomcat.version}</version>-->
-<!--        </dependency>-->
-        <!-- end of tomcat embedded -->
-
+        <!-- end upload -->
 
     </dependencies>
 

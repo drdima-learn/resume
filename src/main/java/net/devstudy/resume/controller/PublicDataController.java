@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class PublicDataController extends AbstractController {
 
     @Autowired
     private FindProfileService findProfileService;
+
+    @GetMapping(value = "/")
+    public String getIndex(){
+        return redirect("/welcome");
+    }
 
     @GetMapping(value = "/{uid}")
     public String getProfile(@PathVariable String uid, Model model) {
@@ -71,16 +78,18 @@ public class PublicDataController extends AbstractController {
         }
     }
 
-//    @GetMapping("/fragment/more")
-//    public String moreProfiles(Model model,
-//                          @PageableDefault(size = Constants.MAX_PROFILE_PER_PAGE)
-//                          @SortDefault(sort = "id")
-//                                  Pageable pageable
-//    ) throws UnsupportedEncodingException {
-//        Page<Profile> profiles = findProfileService.findAll(pageable);
-//        model.addAttribute("profiles",profiles.getContent());
-//        return "fragment/profile-items";
-//
-//
-//    }
+    @GetMapping(value = "/sign-in")
+    public String signIn(){
+        return "sign-in";
+    }
+
+    @GetMapping(value = "/sign-in-failed")
+    public String signInFailed(HttpSession session){
+        if (session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION")==null){
+            return redirect("/sign-in");
+        }
+        return "sign-in";
+    }
+
+
 }

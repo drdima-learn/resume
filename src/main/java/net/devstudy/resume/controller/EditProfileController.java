@@ -3,9 +3,11 @@ package net.devstudy.resume.controller;
 import net.devstudy.resume.entity.jpa.Skill;
 import net.devstudy.resume.entity.jpa.SkillCategory;
 import net.devstudy.resume.form.SkillForm;
+import net.devstudy.resume.model.CurrentProfile;
 import net.devstudy.resume.service.EditProfileService;
 import net.devstudy.resume.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,5 +55,10 @@ public class EditProfileController extends AbstractController{
         LOGGER.debug("SkillCategories: {}",skillCategoryList);
         model.addAttribute("skillCategoryList", skillCategoryList);
         return "edit/skills";
+    }
+
+    @GetMapping(value = "/my-profile")
+    public String getMyProfile(@AuthenticationPrincipal CurrentProfile currentProfile){
+        return redirect("/" + currentProfile.getUsername());
     }
 }
