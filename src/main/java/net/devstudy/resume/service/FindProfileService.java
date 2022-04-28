@@ -56,7 +56,8 @@ public class FindProfileService extends AbstractService implements UserDetailsSe
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Profile profile = findProfile(username);
         if (profile!=null){
-            return new CurrentProfile(profile);
+            CurrentProfile currentProfile = new CurrentProfile(profile);
+            return currentProfile;
         } else {
             LOGGER.error("Profile not found by ", username);
             throw new UsernameNotFoundException("Profile not found by " + username);

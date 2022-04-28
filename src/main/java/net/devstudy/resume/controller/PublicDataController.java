@@ -2,6 +2,7 @@ package net.devstudy.resume.controller;
 
 import net.devstudy.resume.Constants;
 import net.devstudy.resume.entity.jpa.Profile;
+import net.devstudy.resume.model.CurrentProfile;
 import net.devstudy.resume.service.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.scheduling.support.SimpleTriggerContext;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +35,6 @@ public class PublicDataController extends AbstractController {
 
     @GetMapping(value = "/{uid}")
     public String getProfile(@PathVariable String uid, Model model) {
-
-
         Profile profile = findProfileService.findByUid(uid);
         model.addAttribute("profile", profile);
         return "profile";
@@ -79,7 +79,10 @@ public class PublicDataController extends AbstractController {
     }
 
     @GetMapping(value = "/sign-in")
-    public String signIn(){
+    public String signIn(@AuthenticationPrincipal CurrentProfile currentProfile){
+        if (currentProfile!=null){
+            return redirect(URL.MY_PROFILE);
+        }
         return "sign-in";
     }
 

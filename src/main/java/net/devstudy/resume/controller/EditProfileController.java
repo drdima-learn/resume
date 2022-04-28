@@ -11,10 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -41,13 +38,18 @@ public class EditProfileController extends AbstractController{
     }
 
     @PostMapping("/skills")
-    public String saveEditSkills(@Valid @ModelAttribute("skillForm") SkillForm form, BindingResult bindingResult, Model model){
+    public String saveEditSkills(
+            @Valid @ModelAttribute("skillForm") SkillForm form,
+            BindingResult bindingResult,
+            Model model,
+            @AuthenticationPrincipal CurrentProfile currentProfile){
         if (bindingResult.hasErrors()){
             return gotoSkillsJSP(model);
         }
         // TODO update skills
         editProfileService.updateSkills(SecurityUtil.getCurrentIdProfile(), form.getItems());
-        return redirect("/aly-dutta");
+        //return redirect("/aly-dutta");
+        return redirect("/" + currentProfile.getUsername());
     }
 
     private String gotoSkillsJSP(Model model) {
@@ -57,8 +59,7 @@ public class EditProfileController extends AbstractController{
         return "edit/skills";
     }
 
-    @GetMapping(value = "/my-profile")
-    public String getMyProfile(@AuthenticationPrincipal CurrentProfile currentProfile){
-        return redirect("/" + currentProfile.getUsername());
-    }
+
+
+
 }
