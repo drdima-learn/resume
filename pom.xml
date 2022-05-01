@@ -198,6 +198,14 @@
 
         <!-- end of mail -->
 
+        <!-- facebook -->
+        <dependency>
+            <groupId>com.restfb</groupId>
+            <artifactId>restfb</artifactId>
+            <version>1.23.0</version>
+        </dependency>
+        <!-- end of facebook -->
+
     </dependencies>
 
 

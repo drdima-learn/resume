@@ -38,6 +38,9 @@
                 <button type="submit" class="btn btn-primary pull-left">Войти</button>
                 <a href="#" class="pull-right">Восстановить доступ</a>
             </div>
+            <div class="form-group text-center">
+                <a href="/fbLogin" class="btn btn-warning">Войти через Facebook</a>
+            </div>
         </form>
     </div>
 </div>
