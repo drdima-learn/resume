@@ -41,6 +41,9 @@
             <div class="form-group text-center">
                 <a href="/fbLogin" class="btn btn-warning">Войти через Facebook</a>
             </div>
+            <div class="form-group text-center">
+                <a href="/oauth2/authorization/github" class="btn btn-warning">Войти через Github</a>
+            </div>
         </form>
     </div>
 </div>

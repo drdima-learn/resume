@@ -1,4 +1,4 @@
-package net.devstudy.resume.controller;
+package net.devstudy.resume.controller.oauth;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -7,8 +7,10 @@ import com.restfb.Version;
 import com.restfb.scope.ExtendedPermissions;
 import com.restfb.scope.ScopeBuilder;
 import com.restfb.types.User;
+import net.devstudy.resume.controller.AbstractController;
+import net.devstudy.resume.controller.URL;
 import net.devstudy.resume.entity.jpa.Profile;
-import net.devstudy.resume.service.SocialService;
+import net.devstudy.resume.service.impl.SocialService;
 import net.devstudy.resume.util.SecurityUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -73,6 +73,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .key("resume-online")
                 .tokenRepository(persistentTokenRepository());
         http.csrf().disable();
+
+
+        http.oauth2Login()
+                .loginPage("/sign-in")
+                .defaultSuccessUrl("/fromGithub")
+                .permitAll();
     }
 
 
