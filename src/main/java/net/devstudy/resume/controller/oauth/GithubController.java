@@ -18,17 +18,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class GithubController extends AbstractController {
-
-
-
     @Autowired
     private SocialService<String> githubSocialService;
 
-
     @GetMapping(value = {"/fromGithub"})
-    //public String fromGithub(@AuthenticationPrincipal OAuth2User principal) {
     public String fromGithub(OAuth2AuthenticationToken authentication) {
-
 
         String email = githubSocialService.getSocialIdentifier(authentication);
         Profile p = githubSocialService.loginViaSocialNetwork(email);
@@ -38,8 +32,6 @@ public class GithubController extends AbstractController {
         } else {
             return redirect(URL.SIGN_IN);
         }
-
-
     }
 
 }

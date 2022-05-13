@@ -14,30 +14,30 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Documented
 @Constraint(validatedBy = {FieldsMatchConstraintValidator.class})
+@Documented
 public @interface FieldsMatch {
 
     String message() default "FieldsMatch";
 
-    String field1();
+    Class<?>[] groups() default {};
 
-    String field2();
+    String first();
+
+    String second();
 
     Class<? extends Payload>[] payload() default {};
 
-    Class<?>[] groups() default {};
 
-
-//    /**
-//     * Defines several <code>@FieldMatch</code> annotations on the same element
-//     *
-//     * @see FieldsMatch
-//     */
-//    @Target({ TYPE, ANNOTATION_TYPE })
-//    @Retention(RUNTIME)
-//    @Documented
-//    @interface List {
-//        FieldsMatch[] value();
-//    }
+    /**
+     * Defines several <code>@FieldMatch</code> annotations on the same element
+     *
+     * @see FieldsMatch
+     */
+    @Target({ TYPE, ANNOTATION_TYPE })
+    @Retention(RUNTIME)
+    @Documented
+    @interface List {
+        FieldsMatch[] value();
+    }
 }

@@ -14,8 +14,8 @@ public class FieldsMatchConstraintValidator implements ConstraintValidator<Field
 
     @Override
     public void initialize(FieldsMatch constraintAnnotation) {
-        this.field1 = constraintAnnotation.field1();
-        this.field2 = constraintAnnotation.field2();
+        this.field1 = constraintAnnotation.first();
+        this.field2 = constraintAnnotation.second();
     }
 
     @Override

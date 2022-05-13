@@ -4,13 +4,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.devstudy.resume.annotation.EnableFormErrorConvertation;
 import net.devstudy.resume.annotation.constraints.EnglishLanguage;
 import net.devstudy.resume.annotation.constraints.FieldsMatch;
 
-import javax.validation.Valid;
-
 @Getter @Setter @ToString @NoArgsConstructor
-@FieldsMatch(field1 = "password", field2 = "confirmPassword", message = "from SignUpForm pass not match")
+@FieldsMatch(first = "password", second = "confirmPassword", message = "from SignUpForm pass not match")
+@EnableFormErrorConvertation(
+        forName = "signUpForm"
+        ,fieldReference = "confirmPassword"
+        ,validationAnnotationClass = FieldsMatch.class
+        //,validationAnnotationClass = EnglishLanguage.class
+)
 public class SignUpForm {
 
     @EnglishLanguage(withNumbers = false, withPunctuations = false, withSpechSymbols = false)

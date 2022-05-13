@@ -1,5 +1,7 @@
 package net.devstudy.resume.controller;
 
+import net.devstudy.resume.annotation.constraints.FieldsMatch;
+import net.devstudy.resume.component.FormErrorConverter;
 import net.devstudy.resume.entity.jpa.Profile;
 import net.devstudy.resume.form.SignUpForm;
 import net.devstudy.resume.service.EditProfileService;
@@ -22,6 +24,9 @@ public class SignUpController extends AbstractController {
     @Autowired
     EditProfileService editProfileService;
 
+    @Autowired
+    private FormErrorConverter formErrorConverter;
+
     @GetMapping
     public String getSignUp(Model model) {
         model.addAttribute("signUpForm", new SignUpForm());
@@ -31,6 +36,7 @@ public class SignUpController extends AbstractController {
     @PostMapping
     public String postSignUp(@Valid @ModelAttribute SignUpForm signUpForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            formErrorConverter.convertFormErrorToFieldError(FieldsMatch.class, signUpForm, bindingResult);
             LOGGER.debug("form has an error");
             return "signup";
 

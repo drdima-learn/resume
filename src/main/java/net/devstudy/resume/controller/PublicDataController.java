@@ -48,13 +48,13 @@ public class PublicDataController extends AbstractController {
 
     @GetMapping(value = {"/welcome", "/fragment/more"})
     public String listAll(Model model,
-                          @PageableDefault(size = Constants.MAX_PROFILE_PER_PAGE)
+                          @PageableDefault(size = Constants.UI.MAX_PROFILE_PER_PAGE)
                           @SortDefault(sort = "id")
                                   Pageable pageable,
                           HttpServletRequest request
     ){
         if (isWelcome(request)){
-            pageable = PageRequest.of(0, Constants.MAX_PROFILE_PER_PAGE, Sort.by("id"));
+            pageable = PageRequest.of(0, Constants.UI.MAX_PROFILE_PER_PAGE, Sort.by("id"));
         }
         Page<Profile> profiles = findProfileService.findAll(pageable);
         model.addAttribute("profiles",profiles.getContent());
