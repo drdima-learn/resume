@@ -2,7 +2,9 @@ package net.devstudy.resume.util;
 
 import net.devstudy.resume.form.SignUpForm;
 import org.apache.commons.lang.WordUtils;
+import org.springframework.beans.BeanUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 public class DataUtil {
@@ -26,5 +28,14 @@ public class DataUtil {
         Random random = new Random();
         int randomNumber = random.nextInt(5)+1;
         return uid + randomNumber;
+    }
+
+    public static Object readProperty(Object obj, String propertyName) {
+        try{
+            return BeanUtils.getPropertyDescriptor(obj.getClass(), propertyName).getReadMethod().invoke(obj);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalArgumentException("can't read property: " + propertyName + " from object: " + obj.getClass() + ": " + e.getMessage(), e);
+        }
+
     }
 }
